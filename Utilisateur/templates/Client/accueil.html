@@ -121,22 +121,13 @@
 </head>
 <body>
     <header>
-        <h1>Bienvenue, {{ client.nom }} {{ client.prenom }} !</h1>
+        <h1>Bienvenue sur LOVA, votre plateforme de communication favorite !</h1>
     </header>
     
     <div class="container">
-        <!-- Affichage de la photo de profil -->
-        {% if client.photo_profil %}
-            <img src="{{ client.photo_profil.url }}" alt="Photo de profil" class="profile-pic">
-        {% else %}
-            <img src="https://via.placeholder.com/120" alt="Photo de profil par défaut" class="profile-pic">
-        {% endif %}
         
-        <!-- Informations utilisateur -->
-        <p class="info"><strong>Email :</strong> {{ client.email }}</p>
-        <p class="info"><strong>Date de naissance :</strong> {{ client.date_de_naissance|date:"d/m/Y" }}</p>
-        <p class="info"><strong>Date d'inscription :</strong> {{ client.date_inscription|date:"d/m/Y H:i" }}</p>
-        <p class="info"><strong>Numéro CIN :</strong> {{ client.numero_cin }}</p>
+        <h1>Accueil Client</h1>
+
 
         <!-- Bouton de déconnexion -->
         <a href="{% url 'deconnexion_client' %}" class="button deconnexion-button">
