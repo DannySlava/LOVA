@@ -77,7 +77,7 @@ def inscription_client(request):
 def connexion_view(request):
     return render(request, 'Client/connexion.html')
 
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exemptù
 
 @csrf_exempt
 def connexion(request):
