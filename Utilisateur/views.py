@@ -75,25 +75,35 @@ def inscription_client(request):
     return render(request, 'Client/inscription_client.html')
 
 def connexion_view(request):
-    return render(request, 'Client/connexion_client.html')
+    return render(request, 'Client/connexion.html')
 
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def connexion_client(request):
+def connexion(request):
     crypt = PasswordCrypto()
     if request.method == 'POST':
         email = request.POST.get('email')
         mot_de_passe_clair = request.POST.get('mot_de_passe')
         mot_de_passe = crypt.encrypt(mot_de_passe_clair)
-        # Authentification du client
+
+        # Vérifier si l'email et le mot de passe correspondent à un client
         try:
             client = Client.objects.get(email=email, mot_de_passe=mot_de_passe)
             request.session['id_client'] = client.id_client
-            return redirect('accueil')  # Redirige vers la page d'accueil du client
+            return redirect('accueil') 
         except Client.DoesNotExist:
-            messages.error(request, "Email ou mot de passe incorrect.")
-            return render(request, 'Client/connexion_client.html')
+        
+            try:
+                professeur = Professeur.objects.get(email=email, mot_de_passe=mot_de_passe)
+                request.session['id_professeur'] = professeur.id_professeur
+                return redirect('accueil')
+            except Professeur.DoesNotExist:
+                messages.error(request, "Email ou mot de passe incorrect.")
+                return render(request, 'Client/connexion.html')
+
+    # Si la méthode n'est pas POST, afficher le formulaire de connexion
+    return render(request, 'Client/connexion_client.html')
     
     # Si la méthode n'est pas POST, afficher la page de connexion
     return render(request, 'Client/connexion_client.html')
