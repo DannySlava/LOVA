@@ -3,98 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Professeur</title>
-    <!-- Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <title>Inscription Professeur - LOVA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #6fc3df;
-            --accent-color: #47b881;
-            --text-color: #333333;
-            --background-color: #f9fafc;
-            --card-color: #ffffff;
-            --error-color: #e74c3c;
-            --input-focus: #edf2f7;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: all 0.3s ease;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 0;
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #333;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 550px;
+            min-height: 100vh;
             padding: 20px;
-            margin: 20px auto;
         }
-        
+
+        /* Barre de navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            padding: 15px 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ff5733;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            max-width: 550px;
+            width: 100%;
+            animation: fadeIn 1s;
+            margin-top: 20px;
+        }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
-            animation: fadeInDown 0.8s;
         }
-        
+
         .header h2 {
-            color: var(--primary-color);
+            color: #ff5733;
             font-size: 2.2rem;
             margin-bottom: 10px;
+            animation: fadeInDown 0.8s;
         }
-        
+
         .header p {
             color: #666;
             font-size: 1rem;
-        }
-        
-        .form-card {
-            background-color: var(--card-color);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 30px;
             animation: fadeIn 1s;
         }
-        
+
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             position: relative;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-weight: 500;
+            color: #333;
             font-size: 1rem;
-            transition: all 0.3s;
         }
-        
+
         .form-group .icon {
             position: absolute;
             left: 12px;
-            top: 39px;
-            color: var(--primary-color);
-            opacity: 0.7;
+            top: 40px;
+            color: #ff5733;
+            opacity: 0.8;
             font-size: 1.1rem;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 12px 12px 12px 40px;
@@ -104,22 +114,21 @@
             transition: all 0.3s;
             background-color: #fff;
         }
-        
+
         .form-control:focus {
             outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(111, 195, 223, 0.2);
-            background-color: var(--input-focus);
+            border-color: #ff5733;
+            box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.2);
         }
-        
+
         .error {
-            color: var(--error-color);
+            color: #e74c3c;
             font-size: 0.9rem;
             margin-top: 5px;
             display: block;
             animation: shake 0.5s;
         }
-        
+
         .file-upload {
             position: relative;
             overflow: hidden;
@@ -130,12 +139,12 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .file-upload:hover {
-            border-color: var(--secondary-color);
-            background-color: rgba(111, 195, 223, 0.05);
+            border-color: #ff5733;
+            background-color: rgba(255, 87, 51, 0.05);
         }
-        
+
         .file-upload input[type="file"] {
             position: absolute;
             left: 0;
@@ -145,30 +154,30 @@
             height: 100%;
             cursor: pointer;
         }
-        
+
         .file-upload-label {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
-        
+
         .file-upload-icon {
             font-size: 2rem;
-            color: var(--primary-color);
+            color: #ff5733;
         }
-        
+
         .file-name {
             margin-top: 8px;
             font-size: 0.9rem;
-            color: var(--primary-color);
+            color: #ff5733;
             word-break: break-all;
         }
-        
+
         .submit-btn {
             width: 100%;
             padding: 14px;
-            background-color: var(--accent-color);
+            background-color: #ff5733;
             color: white;
             border: none;
             border-radius: 8px;
@@ -176,35 +185,36 @@
             font-weight: 600;
             margin-top: 10px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(71, 184, 129, 0.2);
+            box-shadow: 0 4px 6px rgba(255, 87, 51, 0.2);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s;
         }
-        
+
         .submit-btn:hover {
-            background-color: #3da06f;
+            background-color: #e64a19;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(71, 184, 129, 0.3);
+            box-shadow: 0 6px 12px rgba(255, 87, 51, 0.3);
         }
-        
+
         .submit-btn:active {
             transform: translateY(0);
         }
-        
+
         .login-link {
             text-align: center;
             margin-top: 25px;
             font-size: 1rem;
             animation: fadeIn 1.5s;
         }
-        
+
         .login-link a {
-            color: var(--primary-color);
+            color: #ff5733;
             text-decoration: none;
             font-weight: 600;
             margin-left: 5px;
         }
-        
+
         .login-link a:hover {
             text-decoration: underline;
         }
@@ -220,7 +230,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -231,51 +241,13 @@
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes shake {
             0%, 100% {transform: translateX(0);}
             10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
             20%, 40%, 60%, 80% {transform: translateX(5px);}
         }
-        
-        .input-focus-effect {
-            position: relative;
-        }
-        
-        .input-focus-effect::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--secondary-color);
-            transition: width 0.3s;
-        }
-        
-        .input-focus-effect input:focus ~ ::after {
-            width: 100%;
-        }
-        
-        .form-control.password {
-            padding-right: 40px;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 40px;
-            cursor: pointer;
-            color: #666;
-        }
 
-        /* Style pour textarea */
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        /* Animation de ripple pour le bouton */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -283,105 +255,116 @@
             transform: scale(0);
             animation: ripple 0.6s linear;
         }
-        
+
         @keyframes ripple {
             to {
                 transform: scale(2.5);
                 opacity: 0;
             }
         }
-        
-        /* Media Queries */
+
+        /* Responsive design */
         @media (max-width: 600px) {
             .container {
-                padding: 10px;
-            }
-            
-            .form-card {
                 padding: 20px;
             }
-            
+
             .header h2 {
+                font-size: 1.8rem;
+            }
+
+            .navbar {
+                padding: 12px;
+            }
+
+            .logo {
                 font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <a href="{%url 'accueil_principal'%}" class="logo">
+            <i class="fas fa-comments"></i>
+            LOVA
+        </a>
+    </nav>
+
+    <!-- Contenu principal -->
     <div class="container">
         <div class="header">
             <h2 class="animate__animated animate__fadeInDown">Inscription Professeur</h2>
             <p class="animate__animated animate__fadeIn animate__delay-1s">Rejoignez notre plateforme éducative</p>
         </div>
 
-        <div class="form-card animate__animated animate__fadeIn">
-            <form id="inscriptionProfForm" method="post" action="{% url 'inscription_professeur' %}" enctype="multipart/form-data">
-                {% csrf_token %}
+        <form id="inscriptionProfForm" method="post" action="{% url 'inscription_professeur' %}" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                <div class="form-group">
-                    <label for="nom"><i class="icon fas fa-user"></i> Nom</label>
-                    <input type="text" class="form-control" id="nom" name="nom" maxlength="100" required>
-                </div>
+            <div class="form-group">
+                <label for="nom"><i class="icon fas fa-user"></i> Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" maxlength="100" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="prenom"><i class="icon fas fa-user"></i> Prénom</label>
-                    <input type="text" class="form-control" id="prenom" name="prenom" maxlength="100" required>
-                </div>
+            <div class="form-group">
+                <label for="prenom"><i class="icon fas fa-user"></i> Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" maxlength="100" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="date_de_naissance"><i class="icon fas fa-calendar-alt"></i> Date de naissance</label>
-                    <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
-                </div>
+            <div class="form-group">
+                <label for="date_de_naissance"><i class="icon fas fa-calendar-alt"></i> Date de naissance</label>
+                <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="email"><i class="icon fas fa-envelope"></i> Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
+            <div class="form-group">
+                <label for="email"><i class="icon fas fa-envelope"></i> Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="mot_de_passe"><i class="icon fas fa-lock"></i> Mot de passe</label>
-                    <input type="password" class="form-control password" id="mot_de_passe" name="mot_de_passe" maxlength="128" required>
-                    <span class="password-toggle" onclick="togglePassword('mot_de_passe')">
-                        <i class="fas fa-eye"></i>
-                    </span>
-                </div>
+            <div class="form-group">
+                <label for="mot_de_passe"><i class="icon fas fa-lock"></i> Mot de passe</label>
+                <input type="password" class="form-control password" id="mot_de_passe" name="mot_de_passe" maxlength="128" required>
+                <span class="password-toggle" onclick="togglePassword('mot_de_passe')">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
 
-                <div class="form-group">
-                    <label for="confirm_password"><i class="icon fas fa-lock"></i> Confirmer le mot de passe</label>
-                    <input type="password" class="form-control password" id="confirm_password" name="confirm_password" maxlength="128" required>
-                    <span class="password-toggle" onclick="togglePassword('confirm_password')">
-                        <i class="fas fa-eye"></i>
-                    </span>
-                    <span id="passwordError" class="error"></span>
-                </div>
+            <div class="form-group">
+                <label for="confirm_password"><i class="icon fas fa-lock"></i> Confirmer le mot de passe</label>
+                <input type="password" class="form-control password" id="confirm_password" name="confirm_password" maxlength="128" required>
+                <span class="password-toggle" onclick="togglePassword('confirm_password')">
+                    <i class="fas fa-eye"></i>
+                </span>
+                <span id="passwordError" class="error"></span>
+            </div>
 
-                <div class="form-group">
-                    <label for="numero_cin"><i class="icon fas fa-id-card"></i> Numéro CIN</label>
-                    <input type="text" class="form-control" id="numero_cin" name="numero_cin" maxlength="20" required>
-                </div>
+            <div class="form-group">
+                <label for="numero_cin"><i class="icon fas fa-id-card"></i> Numéro CIN</label>
+                <input type="text" class="form-control" id="numero_cin" name="numero_cin" maxlength="20" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="photo_profil">Photo de profil</label>
-                    <div class="file-upload" id="fileUploadArea">
-                        <input type="file" id="photo_profil" name="photo_profil" accept="image/*" onchange="updateFileName(this)">
-                        <div class="file-upload-label">
-                            <i class="file-upload-icon fas fa-cloud-upload-alt"></i>
-                            <span>Faites glisser votre photo ou cliquez pour la télécharger</span>
-                            <span id="fileName" class="file-name"></span>
-                        </div>
+            <div class="form-group">
+                <label for="photo_profil">Photo de profil</label>
+                <div class="file-upload" id="fileUploadArea">
+                    <input type="file" id="photo_profil" name="photo_profil" accept="image/*" onchange="updateFileName(this)">
+                    <div class="file-upload-label">
+                        <i class="file-upload-icon fas fa-cloud-upload-alt"></i>
+                        <span>Faites glisser votre photo ou cliquez pour la télécharger</span>
+                        <span id="fileName" class="file-name"></span>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="biographie"><i class="icon fas fa-book"></i> Biographie</label>
-                    <textarea class="form-control" id="biographie" name="biographie" rows="4" placeholder="Parlez-nous un peu de vous, de votre expérience et de vos spécialités..."></textarea>
-                </div>
+            <div class="form-group">
+                <label for="biographie"><i class="icon fas fa-book"></i> Biographie</label>
+                <textarea class="form-control" id="biographie" name="biographie" rows="4" placeholder="Parlez-nous un peu de vous, de votre expérience et de vos spécialités..."></textarea>
+            </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-user-plus"></i> S'inscrire
-                </button>
-            </form>
-        </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-user-plus"></i> S'inscrire
+            </button>
+        </form>
 
         <div class="login-link">
             Vous avez déjà un compte? <a href="{% url 'connexion_view' %}">Connectez-vous</a>
@@ -498,8 +481,8 @@
         });
         
         function highlight() {
-            fileUploadArea.style.borderColor = '#4a6fa5';
-            fileUploadArea.style.backgroundColor = 'rgba(74, 111, 165, 0.1)';
+            fileUploadArea.style.borderColor = '#ff5733';
+            fileUploadArea.style.backgroundColor = 'rgba(255, 87, 51, 0.1)';
         }
         
         function unhighlight() {

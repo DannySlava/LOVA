@@ -5,11 +5,12 @@ from .models import Client, Professeur
 from .crypt import PasswordCrypto
 from django.contrib.auth import authenticate, login
 
-def accueil(request):
-    if 'id_client' not in request.session:
-        return HttpResponse("Accès non autorisé")
-    
-    return render(request, 'Client/accueil.html')
+def accueil_principal(request):
+    profs = Professeur.objects.all()
+    return render(request, 'Client/accueil_principal.html', {'profs': profs})
+
+def choix_utilisateur(request):
+    return render(request, 'Client/choix_utilisateur.html')
 
 def deconnexion_client(request):
     if 'id_client' in request.session:
@@ -77,9 +78,6 @@ def inscription_client(request):
 def connexion_view(request):
     return render(request, 'Client/connexion.html')
 
-from django.views.decorators.csrf import csrf_exemptù
-
-@csrf_exempt
 def connexion(request):
     crypt = PasswordCrypto()
     if request.method == 'POST':
@@ -91,13 +89,13 @@ def connexion(request):
         try:
             client = Client.objects.get(email=email, mot_de_passe=mot_de_passe)
             request.session['id_client'] = client.id_client
-            return redirect('accueil') 
+            return render(request, 'Client/accueil.html')
         except Client.DoesNotExist:
         
             try:
                 professeur = Professeur.objects.get(email=email, mot_de_passe=mot_de_passe)
                 request.session['id_professeur'] = professeur.id_professeur
-                return redirect('accueil')
+                return render(request, 'Client/accueil.html')
             except Professeur.DoesNotExist:
                 messages.error(request, "Email ou mot de passe incorrect.")
                 return render(request, 'Client/connexion.html')

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix Utilisateur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-color: #ff5733; /* Remplacer la couleur principale par celle de la deuxième page */
+            --secondary-color: #feb47b; /* Remplacer la couleur secondaire */
+            --accent-color: #ff7e5f; /* Couleur accent */
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Changer le fond de la page */
+            color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 50px;
+            padding: 8px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-form input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        .search-form button {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-form button:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .signup-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background: #e64a19;
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .login-btn:hover {
+            background: #fff8f6;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        /* Rest of the styling */
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease-out;
+            margin-top: 80px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: slideDown 1s ease-out;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style-type: none;
+        }
+        
+        .option {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .option a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-color);
+            padding: 2rem;
+            width: 200px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover a {
+            transform: translateY(-10px);
+            background-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .option i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .option h2 {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .options {
+                flex-direction: column;
+            }
+            
+            .option a {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="{%url 'accueil_principal'%}" class="logo">
+            <i class="fas fa-comments"></i>
+            LOVA
+        </a>
+        
+        <form class="search-form">
+            <input type="text" placeholder="Rechercher...">
+            <button type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+        
+        <div class="nav-links">
+            <a href="{%url 'choix_utilisateur'%}" class="nav-btn signup-btn">
+                <i class="fas fa-user-plus"></i>
+                S'inscrire
+            </a>
+            <a href="#" class="nav-btn login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Se connecter
+            </a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Vous êtes un ?</h1>
+        <ul class="options">
+            <li class="option">
+                <a href="{%url 'inscription_prof_view'%}">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h2>Professeur</h2>
+                </a>
+            </li>
+            <li class="option">
+                <a href="/etudiant">
+                    <i class="fas fa-user-graduate"></i>
+                    <h2>Élève</h2>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+</body>
+</html>
