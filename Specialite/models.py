@@ -1,10 +1,10 @@
+from django.db import models                                                                                                                                               
+from Utilisateur.models import Professeur
 from django.db import models
-from Professeur.models import Professeur
-from django.db import models as Model
 
 # Create your models here.
 
-class Specialite(Model.models):
+class Specialite(models.Model):
     id_specialite = models.AutoField(primary_key=True)
     nom_specialite = models.CharField(max_length=255)
     description = models.TextField()
@@ -42,16 +42,16 @@ class Specialite(Model.models):
         self.date_creation = date_creation
 
 
-class Cours(Model.models):
+class Cours(models.Model):
     id_cours = models.AutoField(primary_key=True)
     id_professeur = models.ForeignKey(Professeur, on_delete=models.CASCADE)
     id_specialite = models.ForeignKey(Specialite, on_delete=models.CASCADE)
     prix_heure = models.FloatField()
     date_creation = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
-        return self.id_cours
+        return f"Cours {self.id_cours} - {self.id_professeur}"
+
 
     def get_id_cours(self):
         return self.id_cours

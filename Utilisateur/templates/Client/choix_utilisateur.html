@@ -251,23 +251,7 @@
             <i class="fas fa-comments"></i>
             LOVA
         </a>
-        
-        <form class="search-form">
-            <input type="text" placeholder="Rechercher...">
-            <button type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
-        
-        <div class="nav-links">
-            <a href="{%url 'choix_utilisateur'%}" class="nav-btn signup-btn">
-                <i class="fas fa-user-plus"></i>
-                S'inscrire
-            </a>
-            <a href="#" class="nav-btn login-btn">
-                <i class="fas fa-sign-in-alt"></i>
-                Se connecter
-            </a>
+
         </div>
     </nav>
     
@@ -281,9 +265,9 @@
                 </a>
             </li>
             <li class="option">
-                <a href="/etudiant">
+                <a href="{%url 'inscription_client_view'%}">
                     <i class="fas fa-user-graduate"></i>
-                    <h2>Élève</h2>
+                    <h2>Client</h2>
                 </a>
             </li>
         </ul>

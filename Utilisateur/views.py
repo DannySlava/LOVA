@@ -31,14 +31,8 @@ def inscription_client(request):
         date_de_naissance = request.POST.get('date_de_naissance')
         email = request.POST.get('email')
         mot_de_passe = request.POST.get('mot_de_passe')
-        confirm_password = request.POST.get('confirm_password')
         numero_cin = request.POST.get('numero_cin')
         photo_profil = request.FILES.get('photo_profil')
-
-        # Vérification des mots de passes
-        if mot_de_passe != confirm_password:
-            messages.error(request, "Les mots de passe ne correspondent pas.")
-            return render(request, 'Client/inscription_client.html')
 
         # Vérification si l'email ou le CIN existe déjà
         if Client.objects.filter(email=email).exists():
@@ -50,7 +44,6 @@ def inscription_client(request):
             return render(request, 'Client/inscription_client.html')
 
         try:
-            
             encrypted_password = crypto.encrypt(mot_de_passe)
             
             # Enregistrement du client
@@ -65,21 +58,50 @@ def inscription_client(request):
             )
             client.full_clean()  # Valide les contraintes du modèle
             client.save()
-            #messages.success(request, "Inscription réussie !")
             return redirect('connexion_view')
             
         except ValidationError as e:
-            messages.error(request, f"Erreur lors de l'inscription: {e}")
+            print(request, f"Erreur lors de l'inscription: {e}")
         except Exception as e:
-            messages.error(request, f"Erreur lors du chiffrement du mot de passe: {str(e)}")
+            print(request, f"Erreur lors du chiffrement du mot de passe: {str(e)}")
 
     return render(request, 'Client/inscription_client.html')
+
 
 def connexion_view(request):
     return render(request, 'Client/connexion.html')
 
+# def connexion(request):
+#     crypt = PasswordCrypto()
+    
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         mot_de_passe_clair = request.POST.get('mot_de_passe')
+#         mot_de_passe = crypt.encrypt(mot_de_passe_clair)
+
+#         # Vérifier si l'email et le mot de passe correspondent à un client
+#         try:
+#             client = Client.objects.get(email=email, mot_de_passe=mot_de_passe)
+#             request.session['id_client'] = client.id_client
+#             request.session['user_type'] = 'client'
+#             return redirect('accueil_client')  # Utiliser redirect au lieu de render
+#         except Client.DoesNotExist:
+#             # Si ce n'est pas un client, vérifier si c'est un professeur
+#             try:
+#                 professeur = Professeur.objects.get(email=email, mot_de_passe=mot_de_passe)
+#                 request.session['id_professeur'] = professeur.id_professeur
+#                 request.session['user_type'] = 'professeur'
+#                 return redirect('accueil_professeur')  # Utiliser redirect au lieu de render
+#             except Professeur.DoesNotExist:
+#                 messages.error(request, "Email ou mot de passe incorrect.")
+#                 return render(request, 'Client/connexion.html')
+
+#     # Si la méthode n'est pas POST, afficher le formulaire de connexion
+#     return render(request, 'Client/connexion.html')  # Utiliser un seul return et le bon template
+
 def connexion(request):
     crypt = PasswordCrypto()
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         mot_de_passe_clair = request.POST.get('mot_de_passe')
@@ -89,21 +111,13 @@ def connexion(request):
         try:
             client = Client.objects.get(email=email, mot_de_passe=mot_de_passe)
             request.session['id_client'] = client.id_client
-            return render(request, 'Client/accueil.html')
+            request.session['user_type'] = 'client'
+            return redirect('accueil_client')
         except Client.DoesNotExist:
-        
-            try:
-                professeur = Professeur.objects.get(email=email, mot_de_passe=mot_de_passe)
-                request.session['id_professeur'] = professeur.id_professeur
-                return render(request, 'Client/accueil.html')
-            except Professeur.DoesNotExist:
-                messages.error(request, "Email ou mot de passe incorrect.")
-                return render(request, 'Client/connexion.html')
+            messages.error(request, "Email ou mot de passe incorrect.")
+            return render(request, 'Client/connexion_client.html')
 
     # Si la méthode n'est pas POST, afficher le formulaire de connexion
-    return render(request, 'Client/connexion_client.html')
-    
-    # Si la méthode n'est pas POST, afficher la page de connexion
     return render(request, 'Client/connexion_client.html')
 
 def inscription_prof_view(request):
@@ -163,4 +177,3 @@ def inscription_prof(request):
             messages.error(request, f"Erreur lors du chiffrement du mot de passe: {str(e)}")
 
     return render(request, 'Professeur/inscription_prof.html')
-

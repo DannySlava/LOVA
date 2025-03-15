@@ -385,7 +385,7 @@
             </a>
             
             <form class="search-form">
-                <input type="text" placeholder="Rechercher...">
+                <input type="text" placeholder="Que voulez-vous appprendre ?">
                 <button type="submit">
                     <i class="fas fa-search"></i>
                 </button>
@@ -396,7 +396,7 @@
                     <i class="fas fa-user-plus"></i>
                     S'inscrire
                 </a>
-                <a href="#" class="nav-btn login-btn">
+                <a href="{%url 'connexion_view'%}" class="nav-btn login-btn">
                     <i class="fas fa-sign-in-alt"></i>
                     Se connecter
                 </a>
@@ -433,7 +433,7 @@
                 <div class="prof-card">
                     <img src="{{ prof.photo_profil }}" alt="Photo de {{ prof.nom }}" class="prof-photo">
                     <h3 class="prof-name">{{ prof.nom }} {{ prof.prenom }}</h3>
-                    <p class="prof-specialite">{{ prof.specialite }}</p>
+                    <p class="prof-specialite">{{ prof.id_cours.id_specialite.nom_specialite }}</p>
                     <p class="prof-email">{{ prof.email }}</p>
                     <p class="prof-bio">{{ prof.biographie }}</p>
                     <a href="mailto:{{ prof.email }}" class="prof-contact">

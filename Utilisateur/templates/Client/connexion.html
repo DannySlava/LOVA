@@ -8,35 +8,40 @@
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        form {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+        .container {
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            text-align: left;
             font-weight: bold;
+            margin-top: 10px;
         }
         input {
-            width: calc(100% - 40px);
-            padding: 8px;
-            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            display: inline-block;
         }
         .input-container {
             position: relative;
-        }
-        .input-container input {
-            width: calc(100% - 40px);
         }
         .input-container .toggle-password {
             position: absolute;
@@ -51,52 +56,61 @@
             margin-bottom: 10px;
         }
         button {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
             background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 15px;
         }
         button:hover {
             background-color: #218838;
         }
-        h3 a {
+        .register-link {
+            margin-top: 15px;
+        }
+        .register-link a {
             color: #007bff;
             text-decoration: none;
         }
-        h3 a:hover {
+        .register-link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h2>Connexion Client</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <p class="{{ message.tags }}">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+    <div class="container">
+        <h2>Connexion Client</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
 
-    <form id="connexionForm" method="post" action="{% url 'connexion' %}">
-        {% csrf_token %}
+        <form id="connexionForm" method="post" action="{% url 'connexion' %}">
+            {% csrf_token %}
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="mot_de_passe">Mot de passe:</label>
-        <div class="input-container">
-            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            <label for="mot_de_passe">Mot de passe:</label>
+            <div class="input-container">
+                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
+
+            <div id="passwordError" class="error"></div>
+
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <div class="register-link">
+            <p>Pas encore inscrit ? <a href="{% url 'choix_utilisateur'%}">Inscrivez-vous</a></p>
         </div>
-
-        <div id="passwordError" class="error"></div>
-
-        <button type="submit">Se connecter</button>
-    </form>
-
-    <h3>Pas encore inscrit ? <a href="{% url 'inscription_view' %}">Inscrivez-vous</a></h3>
+    </div>
 
     <script>
         function togglePassword() {
